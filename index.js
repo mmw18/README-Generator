@@ -34,6 +34,12 @@ const questions = [
         type: "input",
         message: "Have you written tests for this application? If so, provide examples on how to run them",
         name: "tests"
+    },
+    {
+        type: "list",
+        message: "What is the license for this project?",
+        name: "license",
+        choices: ["MIT", "Apache License 2.0", "GNU AGPLv3", "N/A"]
     }
 
 // figure out how to create the table of contents and the license selector
@@ -45,7 +51,7 @@ function writeToFile(fileName, data) {
         if (err) {
             console.error(err);
         } else {
-            cconsole.log(`${fileName} has been successfully generated`);
+            console.log(`${fileName} has been successfully generated`);
         }
     });
 }
