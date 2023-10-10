@@ -1,9 +1,11 @@
-// TODO: Include packages needed for this application
+// Declaring variables, carrying packages needed for this code to run
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown');
 
-// TODO: Create an array of questions for user input
+/* Array of questions that will be prompted/asked to the user. 
+The user's answers to these will be later used in the generateMarkdown function
+exported from the generateMarkdown.js file */
 const questions = [
     {
         type: "input",
@@ -41,22 +43,23 @@ const questions = [
         name: "license",
         choices: ["MIT", "Apache License 2.0", "GNU AGPLv3", "N/A"]
     }
-
-// figure out how to create the table of contents and the license selector
 ];
 
-// TODO: Create a function to write README file
+/* Function to create the actual README file, after questions have been
+answered by the user */
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) => {
         if (err) {
-            console.error(err);
+            console.error(err); // logging an error if no data could be fetched
         } else {
             console.log(`${fileName} has been successfully generated`);
         }
     });
 }
 
-// TODO: Create a function to initialize app
+/* Function to initialize this application. A user will be prompted the questions, 
+then user's question answers are used in the generateMarkdown function. What is produced
+with the generateMarkdown function is then going to be pasted as content into a README.md file. */
 function init() {
     inquirer.prompt(questions)
         .then((answers) => {
@@ -64,9 +67,9 @@ function init() {
             writeToFile('README.md', readmeContent)
         })
         .catch((err) => {
-            console.error(err);
+            console.error(err); // logging an error if one is caught
         });
 }
 
-// Function call to initialize app
+// Calling the init function, written above^ 
 init();
