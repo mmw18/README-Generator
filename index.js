@@ -29,7 +29,7 @@ const questions = [
     },
     {
         type: "input",
-        message: "If you created an application or package and would like other developers to contribute, you can include guidelines for how to do so.",
+        message: "If you would like other developers to contribute, you can include guidelines for how to do so.",
         name: "contributions"
     },
     {
@@ -42,7 +42,24 @@ const questions = [
         message: "What is the license for this project?",
         name: "license",
         choices: ["MIT", "Apache License 2.0", "GNU AGPLv3", "N/A"]
-    }
+    },
+    {
+        type: "list",
+        message: "Would you like to include a 'Questions' section with some of ways for others to reach out to you or view your other projects?",
+        name: "questions",
+        choices: ["Yes", "No"]
+    },
+    {
+        type: "input",
+        message: "If you have selected to include a 'Questions' section, and you would like it to contain your GitHub link, please input your username.",
+        name: "github"
+    },
+    {
+        type: "input",
+        message: "If you have selected to include a 'Questions' section, and you would like it to contain your email address, please input your email.",
+        name: "email"
+    }    
+    
 ];
 
 /* Function to create the actual README file, after questions have been
@@ -63,6 +80,7 @@ with the generateMarkdown function is then going to be pasted as content into a 
 function init() {
     inquirer.prompt(questions)
         .then((answers) => {
+            console.log(answers);
             const readmeContent = generateMarkdown(answers);
             writeToFile('README.md', readmeContent)
         })
